@@ -140,5 +140,16 @@ export IMAP_PORT="993"
 ### **Consideraciones de Seguridad**
 
 - **Contraseñas**: Si usas verificación en dos pasos, necesitarás generar una **contraseña de aplicación** para acceder al correo de forma segura.
-- **Seguridad de las Credenciales**: Evita almacenar tus credenciales directamente en el código. Usa variables de entorno o un archivo de configuración que no se comparta públicamente.
+- **Seguridad de las Credenciales**: Evita almacenar tus credenciales directamente en el código. Usa variables de entorno o un archivo de configuración que no se comparta 
+
+### 🔧 **Librerías externas (requieren instalación)**
+Debes instalarlas con `pip`:
+
+```bash
+pip install requests apscheduler python-dotenv
 ```
+
+- `requests` → Para hacer peticiones HTTP y enviar datos al endpoint.
+- `apscheduler` → Para programar la ejecución del bot a una hora específica.
+
+---
