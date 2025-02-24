@@ -33,7 +33,15 @@ def obtener_correos_certificados(mail):
     """Obtener correos no leídos con 'Certificados' en el asunto."""
     mail.select("inbox")
     status, mensajes = mail.search(None, '(UNSEEN SUBJECT "Certificados")')
-    return mensajes[0].split() if status == "OK" else []
+    # logging.info(f"Estado de la búsqueda: {status}")
+    if status == "OK":
+        # logging.info(f"Mensajes encontrados: {mensajes[0]}")
+        # status, carpetas = mail.list()
+        # logging.info(f"Carpetas disponibles: {carpetas}")
+        return mensajes[0].split() if mensajes[0] else []
+    else:
+        logging.info("No se encontraron mensajes.")
+        return []
 
 def obtener_cuerpo(mensaje):
     """Obtener el cuerpo del mensaje (texto plano o HTML)."""

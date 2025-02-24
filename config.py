@@ -9,7 +9,6 @@ IMAP_SERVER = os.getenv("IMAP_SERVER", "imap.gmail.com")
 IMAP_PORT = int(os.getenv("IMAP_PORT", 993))  # Valor predeterminado si no se encuentra la variable
 CORREO = os.getenv("CORREO")
 PASSWORD_APLICATION = os.getenv("PASSWORD_APLICATION")
-URL_ENDPOINT= os.getenv('URL_ENDPOINT', 'https://bilbao.dynnamo.com/bilbao/?action=sync-certificados-camara')
 
 # Configuración SSH
 SSH_HOST = os.getenv("SSH_HOST")
