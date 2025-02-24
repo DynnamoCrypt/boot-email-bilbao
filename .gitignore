@@ -1,6 +1,7 @@
 # Ignorar entornos virtuales de Python
 venv/
 .env
+.venv/
 *.pyc
 __pycache__/
 *.pyo
