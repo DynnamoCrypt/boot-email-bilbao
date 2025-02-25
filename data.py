@@ -153,53 +153,61 @@ logging.basicConfig(level=logging.INFO)
 
 
 
-def ejecutar_consulta(sql):
-    """
-    Ejecuta una consulta SQL y muestra los resultados en la consola.
-    """
-    try:
-        # Establecer el túnel SSH
-        with SSHTunnelForwarder(
-            (SSH_HOST, SSH_PORT),
-            ssh_username=SSH_USER,
-            ssh_pkey=SSH_KEY_FILE,
-            remote_bind_address=("127.0.0.1", DB_PORT),
-            local_bind_address=("127.0.0.1", 3307)
-        ) as tunnel:
-            logging.info(f"Túnel SSH activo en el puerto local: {tunnel.local_bind_port}")
+# def ejecutar_consulta(sql):
+#     """
+#     Ejecuta una consulta SQL y muestra los resultados en la consola.
+#     """
+#     try:
+#         # Establecer el túnel SSH
+#         with SSHTunnelForwarder(
+#             (SSH_HOST, SSH_PORT),
+#             ssh_username=SSH_USER,
+#             ssh_pkey=SSH_KEY_FILE,
+#             remote_bind_address=("127.0.0.1", DB_PORT),
+#             local_bind_address=("127.0.0.1", 3307)
+#         ) as tunnel:
+#             logging.info(f"Túnel SSH activo en el puerto local: {tunnel.local_bind_port}")
 
-            # Conectar a la base de datos a través del túnel SSH
-            connection = pymysql.connect(
-                host="127.0.0.1",
-                port=tunnel.local_bind_port,
-                user=DB_USER,
-                password=DB_PASSWORD,
-                db=DB_NAME,
-                charset="utf8mb4",
-                cursorclass=pymysql.cursors.DictCursor
-            )
+#             # Conectar a la base de datos a través del túnel SSH
+#             connection = pymysql.connect(
+#                 host="127.0.0.1",
+#                 port=tunnel.local_bind_port,
+#                 user=DB_USER,
+#                 password=DB_PASSWORD,
+#                 db=DB_NAME,
+#                 charset="utf8mb4",
+#                 cursorclass=pymysql.cursors.DictCursor
+#             )
 
-            try:
-                with connection.cursor() as cursor:
-                    cursor.execute(sql)
-                    resultados = cursor.fetchall()
+#             try:
+#                 with connection.cursor() as cursor:
+#                     cursor.execute(sql)
+#                     resultados = cursor.fetchall()
 
-                    if resultados:
-                        logging.info("Resultados de la consulta:")
-                        for fila in resultados:
-                            logging.info(fila)
-                    else:
-                        logging.info("La consulta no devolvió resultados.")
+#                     if resultados:
+#                         logging.info("Resultados de la consulta:")
+#                         for fila in resultados:
+#                             logging.info(fila)
+#                     else:
+#                         logging.info("La consulta no devolvió resultados.")
 
-            finally:
-                connection.close()
-                logging.info("Conexión a la base de datos finalizada.")
+#             finally:
+#                 connection.close()
+#                 logging.info("Conexión a la base de datos finalizada.")
 
-    except Exception as e:
-        logging.error(f"Se produjo un error: {e}")
+#     except Exception as e:
+#         logging.error(f"Se produjo un error: {e}")
 
 
-if __name__ == "__main__":
-    # ejecutar_bot()
-    ejecutar_consulta("SELECT link_cert FROM cartas_porte  WHERE carta_porte = 10120645348")   
+# if __name__ == "__main__":
+#     # ejecutar_bot()
+#     ejecutar_consulta("SELECT link_cert FROM cartas_porte  WHERE carta_porte = 10120645348")   
 
+import os
+
+key_path = "./ERPDYNNAMO.pem"
+
+if os.path.exists(key_path):
+    print(f"✅ Archivo encontrado: {os.path.abspath(key_path)}")
+else:
+    print("❌ Archivo NO encontrado.")

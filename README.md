@@ -154,3 +154,116 @@ if __name__ == "__main__":
 ## Conclusión
 Este bot proporciona una solución automatizada para gestionar la recepción de certificados por correo y su actualización en una base de datos remota mediante un túnel SSH. Su configuración basada en variables de entorno facilita su despliegue en distintos entornos.
 
+# build
+ ´´´bash
+ pip install pyinstaller
+´´´
+instala la dependencia para generar el exe, y luego 
+
+´´´bash
+  pyinstaller --onefile  main.py
+´´´
+
+# Configuración de Variables de Entorno en Linux y Windows
+
+## Linux: Establecer Variables de Entorno
+
+### *1. Editar el Archivo de Configuración*
+Para establecer variables de entorno en Linux, edita el archivo de configuración adecuado.
+
+- *Para un usuario en particular*, edita .bashrc:
+  bash
+  nano ~/.bashrc
+  
+- *Para todos los usuarios*, edita /etc/environment:
+  bash
+  sudo nano /etc/environment
+  
+
+### *2. Agregar las Variables*
+Si usas .bashrc o .bash_profile, agrega al final:
+bash
+export IMAP_PORT="993"
+export IMAP_SERVER="imap.gmail.com"
+export CORREO="bilbao.dynnamo@gmail.com"
+export PASSWORD_APLICATION="qhoqogoxzrnelzpu"
+export SSH_HOST="98.82.46.106"
+export SSH_PORT="22"
+export SSH_USER="bitnami"
+export DB_USER="root"
+export DB_PASSWORD="root"
+export DB_NAME="bilbao"
+export DB_PORT="3306"
+export SSH_KEY_FILE="/home/usuario/claves/erpdynnamo.pem"
+
+(Sustituye /home/usuario/claves/erpdynnamo.pem con la ruta correcta).
+
+Si usas /etc/environment, agrega las variables en el mismo formato pero **sin export**:
+bash
+IMAP_PORT="993"
+IMAP_SERVER="imap.gmail.com"
+CORREO="bilbao.dynnamo@gmail.com"
+PASSWORD_APLICATION="qhoqogoxzrnelzpu"
+SSH_HOST="98.82.46.106"
+SSH_PORT="22"
+SSH_USER="bitnami"
+DB_USER="root"
+DB_PASSWORD="root"
+DB_NAME="bilbao"
+DB_PORT="3306"
+SSH_KEY_FILE="/home/usuario/claves/erpdynnamo.pem"
+
+
+### *3. Guardar y Cerrar el Archivo*
+En nano, presiona:
+- CTRL + X para salir.
+- Y y Enter para guardar los cambios.
+
+### *4. Aplicar los Cambios*
+Si editaste .bashrc, ejecuta:
+bash
+source ~/.bashrc
+
+Si editaste /etc/environment, reinicia la sesión o ejecuta:
+bash
+sudo su
+
+
+### *5. Verificar que las Variables Están Configuradas*
+Ejecuta:
+bash
+echo $SSH_KEY_FILE
+
+Si muestra la ruta correcta, la configuración fue exitosa. 🚀
+
+---
+
+## Windows: Establecer Variables de Entorno
+
+En Windows, usa PowerShell para configurar variables de entorno de manera permanente.
+
+Ejecuta los siguientes comandos en una terminal de *PowerShell con privilegios de administrador*:
+
+powershell
+[System.Environment]::SetEnvironmentVariable("IMAP_PORT", "993", "Machine")
+[System.Environment]::SetEnvironmentVariable("IMAP_SERVER", "imap.gmail.com", "Machine")
+[System.Environment]::SetEnvironmentVariable("CORREO", "bilbao.dynnamo@gmail.com", "Machine")
+[System.Environment]::SetEnvironmentVariable("PASSWORD_APLICATION", "qhoqogoxzrnelzpu", "Machine")
+[System.Environment]::SetEnvironmentVariable("SSH_HOST", "98.82.46.106", "Machine")
+[System.Environment]::SetEnvironmentVariable("SSH_PORT", "22", "Machine")
+[System.Environment]::SetEnvironmentVariable("SSH_USER", "bitnami", "Machine")
+[System.Environment]::SetEnvironmentVariable("DB_USER", "root", "Machine")
+[System.Environment]::SetEnvironmentVariable("DB_PASSWORD", "root", "Machine")
+[System.Environment]::SetEnvironmentVariable("DB_NAME", "bilbao", "Machine")
+[System.Environment]::SetEnvironmentVariable("DB_PORT", "3306", "Machine")
+[System.Environment]::SetEnvironmentVariable("SSH_KEY_FILE", "C:\Users\bpadilla\Documents\claves\erpdynnamo.pem", "Machine")
+
+
+### *Verificar las Variables de Entorno en Windows*
+Para comprobar que se configuraron correctamente, usa:
+powershell
+echo $env:SSH_KEY_FILE
+
+Si devuelve la ruta esperada, la configuración fue exitosa. ✅
+
+---
